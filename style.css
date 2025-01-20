@@ -6,6 +6,8 @@
 }
 
 html, body {
+  margin: 0;
+  padding: 0;
   height: 100%;
 }
 
@@ -15,6 +17,7 @@ body {
   color: #333;
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Navigation */
@@ -43,7 +46,7 @@ nav ul li a.active {
 .hero {
   background: url('https://via.placeholder.com/1200x400/4A148C/FFFFFF?text=KI+Solutions') no-repeat center center;
   background-size: cover;
-  height: 400px;
+  min-height: 300px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -97,8 +100,10 @@ nav ul li a.active {
 .pitch-card {
   background-color: #fafafa;
   padding: 20px;
-  width: 250px;
+  width: 100%;
+  max-width: 300px;
   box-shadow: 0 0 5px rgba(0,0,0,0.1);
+  margin: 0 auto;
 }
 .pitch-card h3 {
   margin-bottom: 10px;
@@ -145,7 +150,6 @@ footer {
   color: #fff;
   text-align: center;
   padding: 10px;
-  margin-top: auto;
 }
 
 /* Responsive Design */
