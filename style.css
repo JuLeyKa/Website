@@ -148,6 +148,33 @@ footer {
   margin-top: auto;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  footer {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .hero-content h1 {
+    font-size: 32px;
+  }
+
+  .hero-content p {
+    font-size: 18px;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+
+  .pitch-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}
+
 /* Chatbot */
 .chatbot-button {
   position: fixed;
