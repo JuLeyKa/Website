@@ -13,7 +13,7 @@ body {
 
 /* Navigation */
 header {
-  background-color: #4A148C;
+  background-color: #000000;
   padding: 10px 0;
 }
 nav ul {
@@ -133,7 +133,7 @@ nav ul li a.active {
 
 /* Footer */
 footer {
-  background-color: #4A148C;
+  background-color: #000000;
   color: #fff;
   text-align: center;
   padding: 10px;
