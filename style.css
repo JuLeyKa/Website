@@ -150,28 +150,42 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+
+  /* Footer etwas kleiner */
   footer {
     font-size: 14px;
     padding: 8px;
   }
 
+  /* Hero-Text anpassen */
   .hero-content h1 {
     font-size: 32px;
   }
-
   .hero-content p {
     font-size: 18px;
   }
-
   .btn {
     padding: 8px 16px;
     font-size: 14px;
   }
 
+  /* Pitch-Karten anordnen */
   .pitch-card {
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
+  }
+
+  /* Navigation soll umbrechen können */
+  nav ul {
+    flex-wrap: wrap;         /* <-- wichtig für Zeilenumbruch */
+    justify-content: center; /* zentriert die Links */
+  }
+  nav ul li {
+    margin: 5px;            /* geringeres Margin, damit's nicht zu breit wird */
+  }
+  nav ul li a {
+    font-size: 14px;        /* ggf. kleinere Schrift auf Mobile */
   }
 }
 
