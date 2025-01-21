@@ -1,3 +1,12 @@
+[build]
+  # Falls du ein Build-Script hast, z.B. "npm run build"
+  # command = "npm run build"
+  # publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "18"
+
 [functions]
-directory = "netlify/functions"  # Pfad zur Function
-node_version = "18"             # Node.js-Version
+  directory = "netlify/functions"
+  # Falls du externe Module brauchst, z.B. node-fetch unter Node 16
+  # external_node_modules = ["node-fetch"]
