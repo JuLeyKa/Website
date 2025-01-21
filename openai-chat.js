@@ -8,14 +8,18 @@ exports.handler = async (event) => {
     }
 
     const { userText } = JSON.parse(event.body || "{}");
-    if (!userText) {
-      return {
-        statusCode: 400,
-        body: JSON.stringify({ error: "userText is required" }),
-      };
-    }
 
     const apiKey = process.env.OPENAI_API_KEY;
+
+    // Begrüßung hinzufügen, wenn userText nicht vorhanden ist
+    if (!userText) {
+      return {
+        statusCode: 200,
+        body: JSON.stringify({
+          botReply: "Hallo! Ich bin Halil, dein KI-Experte. Wie kann ich dir heute helfen?"
+        }),
+      };
+    }
 
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
