@@ -7,5 +7,7 @@
 NODE_VERSION = "18"
 
 [functions]
-directory = "netlify/functions" # Pfad zur Function
-node_version = "18" # Node.js-Version
+directory = "netlify/functions"
+
+[functions.node_version]
+external_node_modules = []
