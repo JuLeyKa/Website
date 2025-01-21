@@ -13,12 +13,13 @@ if (openChatBtn && closeChatBtn && chatOverlay) {
   });
 }
 
-// Chatbot-Funktionalität mit OpenAI API
+// Chatbot-Funktionalität über Netlify Function
 const sendChatBtn = document.getElementById("sendChatBtn");
 const chatInput = document.getElementById("chatInput");
 const chatMessages = document.getElementById("chatMessages");
 
-const API_URL = "https://api.openai.com/v1/chat/completions";
+// URL der Netlify Function
+const NETLIFY_FUNCTION_URL = "/.netlify/functions/openai-chat";
 
 function addMessage(sender, text) {
   const msg = document.createElement("div");
@@ -30,53 +31,42 @@ function addMessage(sender, text) {
 
 async function getBotResponse(userText) {
   try {
-    const response = await fetch(API_URL, {
+    const response = await fetch(NETLIFY_FUNCTION_URL, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${process.env.OPENAI_API_KEY}` // Umgebungsvariable nutzen
-      },
-      body: JSON.stringify({
-        model: "asst_FDFfN12YU6VMAYT3V8nm1J4", // Custom GPT-Modell
-        messages: [
-          { role: "system", content: "Du bist ein hilfreicher Assistent." },
-          { role: "user", content: userText }
-        ]
-      })
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ userText }) 
     });
-
     if (!response.ok) {
-      throw new Error("Fehler beim Abrufen der Antwort von OpenAI.");
+      throw new Error("Fehler beim Abrufen der Antwort von der Netlify Function.");
     }
-
     const data = await response.json();
-    return data.choices[0].message.content;
-  } catch (error) {
-    console.error(error);
+    if (data.botReply) {
+      return data.botReply;
+    } else {
+      throw new Error(data.error || "Keine Antwort erhalten");
+    }
+  } catch (err) {
+    console.error(err);
     return "Entschuldigung, es gab ein Problem beim Abrufen der Antwort.";
   }
 }
 
-if (sendChatBtn && chatInput && chatMessages) {
-  sendChatBtn.addEventListener("click", async () => {
-    const userText = chatInput.value.trim();
-    if (!userText) return;
+sendChatBtn.addEventListener("click", async () => {
+  const userText = chatInput.value.trim();
+  if (!userText) return;
 
-    // Zeige User-Nachricht
-    addMessage("user", userText);
-    chatInput.value = "";
+  // User-Message
+  addMessage("user", userText);
+  chatInput.value = "";
 
-    // Hole Bot-Antwort
-    const botText = await getBotResponse(userText);
-    addMessage("bot", botText);
-  });
-}
+  // Bot-Message
+  const botText = await getBotResponse(userText);
+  addMessage("bot", botText);
+});
 
-// Optionale Funktion: Absenden mit Enter-Taste
-if (chatInput) {
-  chatInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      sendChatBtn.click();
-    }
-  });
-}
+// Optionale Enter-Taste
+chatInput.addEventListener("keypress", (e) => {
+  if (e.key === "Enter") {
+    sendChatBtn.click();
+  }
+});
