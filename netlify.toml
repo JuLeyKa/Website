@@ -1,3 +1,3 @@
 [functions]
-directory = "netlify/functions" # Pfad zur Function
-node_version = "18"            # Node.js-Version
+directory = "netlify/functions"  # Pfad zur Function
+node_version = "18"             # Node.js-Version
