@@ -21,22 +21,20 @@ const chatMessages = document.getElementById("chatMessages");
 // URL der Netlify Function
 const NETLIFY_FUNCTION_URL = "/.netlify/functions/openai-chat";
 
-// Nachricht hinzufügen mit Sender ("Juleyka" oder "Du")
 function addMessage(sender, text) {
   const msg = document.createElement("div");
   msg.classList.add(sender === "user" ? "user-message" : "bot-message");
-  msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+  msg.textContent = text;
   chatMessages.appendChild(msg);
-  chatMessages.scrollTop = chatMessages.scrollHeight; // Scrollt automatisch nach unten
+  chatMessages.scrollTop = chatMessages.scrollHeight;
 }
 
-// Bot-Antwort abrufen
 async function getBotResponse(userText) {
   try {
     const response = await fetch(NETLIFY_FUNCTION_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userText }),
+      body: JSON.stringify({ userText }) 
     });
     if (!response.ok) {
       throw new Error("Fehler beim Abrufen der Antwort von der Netlify Function.");
@@ -53,18 +51,17 @@ async function getBotResponse(userText) {
   }
 }
 
-// Nutzer-Nachricht senden
 sendChatBtn.addEventListener("click", async () => {
   const userText = chatInput.value.trim();
   if (!userText) return;
 
-  // User-Message hinzufügen
-  addMessage("Du", userText);
+  // User-Message
+  addMessage("user", userText);
   chatInput.value = "";
 
-  // Bot-Antwort hinzufügen
+  // Bot-Message
   const botText = await getBotResponse(userText);
-  addMessage("Juleyka", botText);
+  addMessage("bot", botText);
 });
 
 // Optionale Enter-Taste
