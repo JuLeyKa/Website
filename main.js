@@ -1,4 +1,3 @@
-main copy
 // Chat-Overlay öffnen/schließen
 const openChatBtn = document.getElementById("openChatBtn");
 const closeChatBtn = document.getElementById("closeChatBtn");
