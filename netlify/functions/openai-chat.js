@@ -11,8 +11,6 @@ exports.handler = async (event) => {
     const apiKey = process.env.OPENAI_API_KEY;
 
     // 1) Prüfen, ob es sich um den "ersten Besuch" (keine User-Eingabe) handelt.
-    //    Wenn ja, geben wir GPT ein fiktives User-Statement,
-    //    damit es von sich aus mit einer Begrüßung loslegt.
     let finalUserText = userText?.trim();
     if (!finalUserText) {
       finalUserText = `
@@ -29,7 +27,7 @@ exports.handler = async (event) => {
         "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4", // ÄNDERUNG HIER
         messages: [
           {
             role: "system",
