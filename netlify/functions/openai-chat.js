@@ -27,7 +27,8 @@ exports.handler = async (event) => {
         "Authorization": `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "gpt-4", // ÄNDERUNG HIER
+        model: "gpt-4o", // Modell geändert auf GPT-4O
+        max_tokens: 300, // Token-Limit für Kosteneffizienz
         messages: [
           {
             role: "system",
