@@ -150,14 +150,10 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-
-  /* Footer etwas kleiner */
   footer {
     font-size: 14px;
     padding: 8px;
   }
-
-  /* Hero-Text anpassen */
   .hero-content h1 {
     font-size: 32px;
   }
@@ -168,24 +164,20 @@ footer {
     padding: 8px 16px;
     font-size: 14px;
   }
-
-  /* Pitch-Karten anordnen */
   .pitch-card {
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
   }
-
-  /* Navigation soll umbrechen können */
   nav ul {
-    flex-wrap: wrap;         /* <-- wichtig für Zeilenumbruch */
-    justify-content: center; /* zentriert die Links */
+    flex-wrap: wrap;
+    justify-content: center;
   }
   nav ul li {
-    margin: 5px;            /* geringeres Margin, damit's nicht zu breit wird */
+    margin: 5px;
   }
   nav ul li a {
-    font-size: 14px;        /* ggf. kleinere Schrift auf Mobile */
+    font-size: 14px;
   }
 }
 
@@ -202,6 +194,7 @@ footer {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+  user-select: none; /* besser fürs Draggen */
 }
 
 .chat-overlay {
@@ -216,6 +209,7 @@ footer {
   justify-content: center;
 }
 
+/* Das Chat-Fenster selbst */
 .chat-window {
   background-color: #fff;
   width: 400px;
@@ -223,8 +217,10 @@ footer {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
+  position: relative; /* Damit wir 'left' / 'top' beim Drag setzen können */
 }
 
+/* Chat-Fenster-Kopfzeile, als Drag-Handle */
 .chat-header {
   background-color: #000000;
   color: #fff;
@@ -232,6 +228,8 @@ footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
+  cursor: move; /* zeigt an, dass man hier greifen kann */
 }
 .chat-header h3 {
   margin: 0;
@@ -248,8 +246,43 @@ footer {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
+
+  display: flex;
+  flex-direction: column;
 }
 
+/* Nachrichten-Stil */
+.user-message,
+.bot-message {
+  margin-bottom: 10px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  max-width: 80%;
+  word-wrap: break-word;
+  align-self: flex-start;
+}
+.user-message {
+  align-self: flex-end;
+  background-color: #FBC02D;
+  color: #333;
+}
+.bot-message {
+  align-self: flex-start;
+  background-color: #ececec;
+  color: #333;
+}
+
+/* Label, damit man sieht: "Du:" oder "Juleyka:" */
+.user-message::before {
+  content: "Du: ";
+  font-weight: bold;
+}
+.bot-message::before {
+  content: "Juleyka: ";
+  font-weight: bold;
+}
+
+/* Eingabebereich */
 .chat-input {
   display: flex;
   padding: 10px;
@@ -260,6 +293,7 @@ footer {
   padding: 10px;
   border-radius: 4px 0 0 4px;
   border: 1px solid #ccc;
+  outline: none;
 }
 .chat-input button {
   padding: 10px 20px;

@@ -56,11 +56,11 @@
   </footer>
 
   <!-- Chatbot-Button und Overlay -->
-  <button class="chatbot-button" id="openChatBtn">Chat</button>
+  <button class="chatbot-button" id="openChatBtn" draggable="true">Chat</button>
 
   <div class="chat-overlay" id="chatOverlay">
-    <div class="chat-window">
-      <div class="chat-header">
+    <div class="chat-window" id="chatWindow">
+      <div class="chat-header" id="chatHeader">
         <h3>Juleyka Chatbot</h3>
         <button id="closeChatBtn">&times;</button>
       </div>
@@ -72,6 +72,7 @@
     </div>
   </div>
 
+  <!-- Script -->
   <script src="main.js"></script>
 </body>
 </html>
