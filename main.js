@@ -1,3 +1,4 @@
+main copy
 // Chat-Overlay öffnen/schließen
 const openChatBtn = document.getElementById("openChatBtn");
 const closeChatBtn = document.getElementById("closeChatBtn");
@@ -13,28 +14,6 @@ if (openChatBtn && closeChatBtn && chatOverlay) {
   });
 }
 
-// Drag-and-Drop für Chatfenster
-const chatWindow = document.querySelector(".chat-window");
-let isDragging = false;
-let offsetX, offsetY;
-
-chatWindow.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  offsetX = e.clientX - chatWindow.offsetLeft;
-  offsetY = e.clientY - chatWindow.offsetTop;
-});
-
-document.addEventListener("mousemove", (e) => {
-  if (isDragging) {
-    chatWindow.style.left = `${e.clientX - offsetX}px`;
-    chatWindow.style.top = `${e.clientY - offsetY}px`;
-  }
-});
-
-document.addEventListener("mouseup", () => {
-  isDragging = false;
-});
-
 // Chatbot-Funktionalität über Netlify Function
 const sendChatBtn = document.getElementById("sendChatBtn");
 const chatInput = document.getElementById("chatInput");
@@ -46,7 +25,7 @@ const NETLIFY_FUNCTION_URL = "/.netlify/functions/openai-chat";
 function addMessage(sender, text) {
   const msg = document.createElement("div");
   msg.classList.add(sender === "user" ? "user-message" : "bot-message");
-  msg.innerHTML = `<strong>${sender === "user" ? "Du:" : "Juleyka:"}</strong> ${text}`;
+  msg.textContent = text;
   chatMessages.appendChild(msg);
   chatMessages.scrollTop = chatMessages.scrollHeight;
 }
@@ -56,7 +35,7 @@ async function getBotResponse(userText) {
     const response = await fetch(NETLIFY_FUNCTION_URL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userText }),
+      body: JSON.stringify({ userText }) 
     });
     if (!response.ok) {
       throw new Error("Fehler beim Abrufen der Antwort von der Netlify Function.");
