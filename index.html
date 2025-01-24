@@ -11,6 +11,7 @@
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
 </head>
 <body>
+
   <!-- Navigation -->
   <header>
     <nav>
@@ -31,7 +32,7 @@
   <section class="hero">
     <div class="hero-content">
       <h1>Willkommen bei Juleyka</h1>
-      <p>Dein Partner für moderne KI-Services & Automatisierungen.</p>
+      <p>Dein Partner für moderne KI-Services &amp; Automatisierungen.</p>
       <a href="services.html" class="btn">Unsere Leistungen entdecken</a>
     </div>
   </section>
@@ -45,11 +46,11 @@
         <p>Von Chatbots über Sprachassistenten bis hin zu automatisierten Prozessen.</p>
       </div>
       <div class="pitch-card">
-        <h3>Beratung & Schulung</h3>
+        <h3>Beratung &amp; Schulung</h3>
         <p>Wir begleiten dich bei allen Schritten — inkl. Workshops und Schulungen.</p>
       </div>
       <div class="pitch-card">
-        <h3>Web & Automatisierung</h3>
+        <h3>Web &amp; Automatisierung</h3>
         <p>Moderne Websites und smarte Workflows mit Zapier oder Make.com.</p>
       </div>
     </div>
@@ -63,10 +64,7 @@
   <!-- Chat-Bereich -->
   <div id="persistent-chat">
     <!-- Chat-Button (fest unten rechts) -->
-    <button class="chatbot-button" id="openChatBtn">
-      Chat
-    </button>
-
+    <button class="chatbot-button" id="openChatBtn">Chat</button>
     <!-- Overlay + Fenster -->
     <div class="chat-overlay" id="chatOverlay">
       <div class="chat-window" id="chatWindow">
@@ -74,9 +72,7 @@
           <h3>Juleyka Chatbot</h3>
           <button id="closeChatBtn">&times;</button>
         </div>
-
         <div class="chat-messages" id="chatMessages"></div>
-
         <div class="chat-input">
           <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
           <button id="sendChatBtn">Senden</button>
@@ -85,20 +81,25 @@
     </div>
   </div>
 
+  <!-- Haupt-JS -->
   <script src="main.js"></script>
 
+  <!-- Kleines Skript zum Navbar-Anpassen -->
   <script>
-    // Firebase-Konfiguration bereits in main.js vorhanden
-    // Auth-Status prüfen und Navigation anpassen
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        // Wenn eingeloggt, Login-Link ausblenden und Member-Link anzeigen
-        document.getElementById("loginLink").style.display = "none";
-        document.getElementById("memberLink").style.display = "block";
-      } else {
-        // Wenn ausgeloggt, Login-Link anzeigen und Member-Link ausblenden
-        document.getElementById("loginLink").style.display = "block";
-        document.getElementById("memberLink").style.display = "none";
+    // Warte kurz, bis main.js initialisiert ist
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof auth !== "undefined") {
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            // Wenn eingeloggt, Login-Link ausblenden und Member-Link anzeigen
+            document.getElementById("loginLink").style.display = "none";
+            document.getElementById("memberLink").style.display = "block";
+          } else {
+            // Ausgeloggt
+            document.getElementById("loginLink").style.display = "block";
+            document.getElementById("memberLink").style.display = "none";
+          }
+        });
       }
     });
   </script>

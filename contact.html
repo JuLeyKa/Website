@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Kontakt - Juleyka</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Firebase SDKs (falls du überall drin hast) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
 </head>
 <body>
 
-  <!-- Navigation -->
   <header>
     <nav>
       <ul>
@@ -18,48 +21,59 @@
         <li><a href="references.html">Referenzen</a></li>
         <li><a href="about.html">Über Uns</a></li>
         <li><a href="contact.html" class="active">Kontakt</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="memberLink" style="display:none;"><a href="member.html">Member-Bereich</a></li>
       </ul>
     </nav>
   </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-content">
-      <h1>Kontakt</h1>
-      <p>Hast du Fragen oder möchtest mehr erfahren? Wir freuen uns auf deine Nachricht!</p>
-    </div>
-  </section>
+  <main style="padding: 20px;">
+    <h1>Kontakt</h1>
+    <p>Hast du Fragen oder möchtest mehr erfahren? Wir freuen uns auf deine Nachricht!</p>
 
-  <!-- Contact Section -->
-  <section class="contact-section" style="text-align: center; margin: 40px auto; max-width: 600px;">
-    <h2 style="font-size: 1.8rem; margin-bottom: 20px;">Schreib uns!</h2>
-    <p style="font-size: 1.2rem; margin-bottom: 30px;">Fülle das Formular aus oder kontaktiere uns direkt per E-Mail oder Telefon.</p>
-    
-    <!-- Contact Form -->
-    <form class="contact-form" style="display: flex; flex-direction: column; gap: 15px;">
-      <label for="name" style="font-size: 1.2rem;">Name *</label>
-      <input type="text" id="name" name="name" required style="padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;" />
+    <h2>Schreib uns!</h2>
+    <p>Fülle das Formular aus oder kontaktiere uns direkt per E-Mail oder Telefon.</p>
 
-      <label for="email" style="font-size: 1.2rem;">E-Mail *</label>
-      <input type="email" id="email" name="email" required style="padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;" />
+    <!-- 
+      WICHTIG: 
+      - name="contact" => Formularname bei Netlify
+      - method="POST" data-netlify="true" => Aktiviert Netlify-Form-Funktion
+      - netlify-honeypot="bot-field" => Spam-Schutz
+      - action="thankyou.html" => Weiterleitung nach erfolgreichem Absenden
+    -->
+    <form 
+      name="contact" 
+      method="POST" 
+      data-netlify="true" 
+      netlify-honeypot="bot-field"
+      action="thankyou.html"
+      style="max-width: 500px;"
+    >
 
-      <label for="message" style="font-size: 1.2rem;">Nachricht *</label>
-      <textarea id="message" name="message" rows="5" required style="padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;"></textarea>
+      <!-- Dieses hidden-Feld ist Pflicht -->
+      <input type="hidden" name="form-name" value="contact" />
 
-      <button type="submit" class="btn" style="padding: 10px 20px; font-size: 1rem; background-color: #f0a500; color: white; border: none; border-radius: 5px; cursor: pointer;">
-        Absenden
-      </button>
+      <!-- Honeypot-Feld => wird via CSS/JS versteckt -->
+      <p style="display:none;">
+        <label>Bitte nicht ausfüllen: <input name="bot-field"/></label>
+      </p>
+
+      <label for="name">Name *</label>
+      <input type="text" id="name" name="name" required/>
+
+      <label for="email">E-Mail *</label>
+      <input type="email" id="email" name="email" required/>
+
+      <label for="message">Nachricht *</label>
+      <textarea id="message" name="message" rows="6" required></textarea>
+
+      <button type="submit" style="margin-top: 10px;">Absenden</button>
     </form>
-  </section>
+  </main>
 
-  <!-- Footer -->
-  <footer style="text-align: center; margin-top: 50px;">
-    <p>&copy; 2025 Juleyka. Alle Rechte vorbehalten.</p>
-  </footer>
-
-  <!-- Chat-Bereich -->
+  <!-- Chat + Auth-Logik -->
   <div id="persistent-chat">
-    <button class="chatbot-button" id="openChatBtn" draggable="true">Chat</button>
+    <button class="chatbot-button" id="openChatBtn">Chat</button>
     <div class="chat-overlay" id="chatOverlay">
       <div class="chat-window" id="chatWindow">
         <div class="chat-header" id="chatHeader">
@@ -68,7 +82,7 @@
         </div>
         <div class="chat-messages" id="chatMessages"></div>
         <div class="chat-input">
-          <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
+          <input type="text" id="chatInput" placeholder="Frage hier eingeben..."/>
           <button id="sendChatBtn">Senden</button>
         </div>
       </div>
@@ -76,5 +90,22 @@
   </div>
 
   <script src="main.js"></script>
+
+  <!-- Script zum Login-Status in Navbar -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof auth !== "undefined") {
+        auth.onAuthStateChanged((user) => {
+          if (user) {
+            document.getElementById("loginLink").style.display = "none";
+            document.getElementById("memberLink").style.display = "block";
+          } else {
+            document.getElementById("loginLink").style.display = "block";
+            document.getElementById("memberLink").style.display = "none";
+          }
+        });
+      }
+    });
+  </script>
 </body>
 </html>

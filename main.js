@@ -1,7 +1,6 @@
 /*********************************************/
 /* CHAT-FUNKTIONEN (unverändert)             */
 /*********************************************/
-
 //--------------------------------------
 // DOM-Elemente für den Chat
 //--------------------------------------
@@ -159,13 +158,12 @@ document.addEventListener("mouseup", () => {
 /*********************************************/
 /* FIREBASE CONFIG & AUTH-LOGIK             */
 /*********************************************/
-
-// 1) Firebase-Konfiguration (bitte anpassen)
+// 1) Firebase-Konfiguration (bitte anpassen!)
 const firebaseConfig = {
-  apiKey: "AIzaSyBU7nmB5pVMK6oBgjD-PTZ_LrZjSCoM1uQ",
+  apiKey: "DEIN_API_KEY",
   authDomain: "juleykaauth.firebaseapp.com",
   projectId: "juleykaauth",
-  storageBucket: "juleykaauth.firebasestorage.app",
+  storageBucket: "juleykaauth.appspot.com",
   messagingSenderId: "153071148995",
   appId: "1:153071148995:web:3420c0a68d9d8ee2f9a776",
   measurementId: "G-NZFEETFNFJ"
@@ -233,7 +231,7 @@ if (document.getElementById("login-form")) {
 /* MEMBER.HTML - Check Login + Logout        */
 /*********************************************/
 if (document.getElementById("logoutBtn")) {
-  // onAuthStateChanged => falls user NICHT eingeloggt => login.html
+  // Check, ob user eingeloggt. Falls nicht -> login.html
   auth.onAuthStateChanged((user) => {
     if (!user) {
       window.location = "login.html";
