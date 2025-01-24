@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Juleyka - KI-Lösungen</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -21,7 +21,7 @@
     </nav>
   </header>
 
-  <!-- Hero-Bereich -->
+  <!-- Hero -->
   <section class="hero">
     <div class="hero-content">
       <h1>Willkommen bei Juleyka</h1>
@@ -30,7 +30,7 @@
     </div>
   </section>
 
-  <!-- Pitch-Abschnitt -->
+  <!-- Pitch -->
   <section class="pitch">
     <h2>Warum Juleyka?</h2>
     <div class="pitch-cards">
@@ -54,16 +54,23 @@
     <p>&copy; 2025 Juleyka. Alle Rechte vorbehalten.</p>
   </footer>
 
-  <!-- Chat (gleicher Code auf jeder Seite) -->
+  <!-- Chat-Bereich -->
   <div id="persistent-chat">
-    <button class="chatbot-button" id="openChatBtn" draggable="true">Chat</button>
+    <!-- Chat-Button (fest unten rechts) -->
+    <button class="chatbot-button" id="openChatBtn">
+      Chat
+    </button>
+
+    <!-- Overlay + Fenster -->
     <div class="chat-overlay" id="chatOverlay">
       <div class="chat-window" id="chatWindow">
         <div class="chat-header" id="chatHeader">
           <h3>Juleyka Chatbot</h3>
           <button id="closeChatBtn">&times;</button>
         </div>
+
         <div class="chat-messages" id="chatMessages"></div>
+
         <div class="chat-input">
           <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
           <button id="sendChatBtn">Senden</button>
