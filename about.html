@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <!-- Navigation -->
   <header>
     <nav>
@@ -50,18 +49,20 @@
     <p>&copy; 2025 Juleyka. Alle Rechte vorbehalten.</p>
   </footer>
 
-  <!-- Chatbot -->
-  <button class="chatbot-button" id="openChatBtn">Chat</button>
-  <div class="chat-overlay" id="chatOverlay">
-    <div class="chat-window">
-      <div class="chat-header">
-        <h3>Juleyka Chatbot</h3>
-        <button id="closeChatBtn">&times;</button>
-      </div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
-        <button id="sendChatBtn">Senden</button>
+  <!-- Chat-Bereich (für *jede* Seite identisch) -->
+  <div id="persistent-chat">
+    <button class="chatbot-button" id="openChatBtn" draggable="true">Chat</button>
+    <div class="chat-overlay" id="chatOverlay">
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header" id="chatHeader">
+          <h3>Juleyka Chatbot</h3>
+          <button id="closeChatBtn">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+          <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
+          <button id="sendChatBtn">Senden</button>
+        </div>
       </div>
     </div>
   </div>

@@ -1,40 +1,180 @@
-// Chat-Overlay öffnen/schließen
+//----------------------------------
+// DOM-Elemente ermitteln
+//----------------------------------
 const openChatBtn = document.getElementById("openChatBtn");
 const closeChatBtn = document.getElementById("closeChatBtn");
 const chatOverlay = document.getElementById("chatOverlay");
 const chatWindow = document.getElementById("chatWindow");
 const chatHeader = document.getElementById("chatHeader");
-
-if (openChatBtn && closeChatBtn && chatOverlay) {
-  openChatBtn.addEventListener("click", () => {
-    chatOverlay.style.display = "flex";
-  });
-
-  closeChatBtn.addEventListener("click", () => {
-    chatOverlay.style.display = "none";
-  });
-}
-
-// Chatbot-Funktionalität über Netlify Function
-const sendChatBtn = document.getElementById("sendChatBtn");
-const chatInput = document.getElementById("chatInput");
 const chatMessages = document.getElementById("chatMessages");
+const chatInput = document.getElementById("chatInput");
+const sendChatBtn = document.getElementById("sendChatBtn");
 
-// URL der Netlify Function
+// Netlify-Function (anpassen bei Bedarf)
 const NETLIFY_FUNCTION_URL = "/.netlify/functions/openai-chat";
 
-// Nachrichten in den Chatverlauf einfügen
-function addMessage(sender, text) {
+//----------------------------------
+// Globale Variablen für Drag & Drop
+//----------------------------------
+let isDraggingWindow = false;
+let windowOffsetX = 0;
+let windowOffsetY = 0;
+let isDraggingButton = false;
+let buttonOffsetX = 0;
+let buttonOffsetY = 0;
+
+//----------------------------------
+// Minimierungs-Logik
+//----------------------------------
+// Wir speichern in localStorage: "chatMinimized" (true/false)
+// und den Chatverlauf.
+
+function setChatVisible(isVisible) {
+  // isVisible = false => Minimieren
+  if (isVisible) {
+    chatOverlay.style.display = "flex";
+    localStorage.setItem("chatMinimized", "false");
+  } else {
+    chatOverlay.style.display = "none";
+    localStorage.setItem("chatMinimized", "true");
+  }
+}
+
+// Laden, ob der Chat minimiert war
+function loadChatMinimizedState() {
+  const minState = localStorage.getItem("chatMinimized");
+  if (minState === "true") {
+    chatOverlay.style.display = "none";
+  } else {
+    // Standard: ChatOverlay anzeigen
+    chatOverlay.style.display = "flex";
+  }
+}
+
+//----------------------------------
+// Chatverlauf laden & speichern
+//----------------------------------
+function loadChatHistory() {
+  const savedMessages = localStorage.getItem("chatMessages");
+  if (savedMessages) {
+    const messages = JSON.parse(savedMessages);
+    messages.forEach(({ sender, text }) => {
+      addMessage(sender, text, false);
+    });
+  }
+}
+
+function saveChatHistory() {
+  if (!chatMessages) return;
+  const msgs = [...chatMessages.children].map(msg => {
+    const isUser = msg.classList.contains("user-message");
+    return {
+      sender: isUser ? "user" : "bot",
+      text: msg.textContent
+    };
+  });
+  localStorage.setItem("chatMessages", JSON.stringify(msgs));
+}
+
+//----------------------------------
+// Nachricht hinzufügen
+//----------------------------------
+function addMessage(sender, text, save = true) {
   const msg = document.createElement("div");
   msg.classList.add(sender === "user" ? "user-message" : "bot-message");
   msg.textContent = text;
   chatMessages.appendChild(msg);
-
-  // Automatisch scrollen
   chatMessages.scrollTop = chatMessages.scrollHeight;
+
+  if (save) {
+    saveChatHistory();
+  }
 }
 
-// OpenAI-Fetch
+//----------------------------------
+// Fenster- & Button-Position
+//----------------------------------
+function saveChatWindowPos(left, top) {
+  localStorage.setItem("chatWindowPos", JSON.stringify({ left, top }));
+}
+function loadChatWindowPos() {
+  const pos = localStorage.getItem("chatWindowPos");
+  if (pos) {
+    const { left, top } = JSON.parse(pos);
+    chatWindow.style.position = "absolute";
+    chatWindow.style.left = left + "px";
+    chatWindow.style.top = top + "px";
+  }
+}
+
+function saveChatButtonPos(left, top) {
+  localStorage.setItem("chatButtonPos", JSON.stringify({ left, top }));
+}
+function loadChatButtonPos() {
+  const pos = localStorage.getItem("chatButtonPos");
+  if (pos) {
+    const { left, top } = JSON.parse(pos);
+    openChatBtn.style.position = "absolute";
+    openChatBtn.style.left = left + "px";
+    openChatBtn.style.top = top + "px";
+  }
+}
+
+//----------------------------------
+// Klick-Events (öffnen / schließen)
+//----------------------------------
+if (openChatBtn) {
+  openChatBtn.addEventListener("click", () => {
+    // Chat-Fenster sichtbar machen
+    setChatVisible(true);
+  });
+}
+
+if (closeChatBtn) {
+  closeChatBtn.addEventListener("click", () => {
+    // Minimieren
+    setChatVisible(false);
+  });
+}
+
+// Klick außerhalb => Minimieren
+document.addEventListener("click", (e) => {
+  // Check: Klick war NICHT in chatWindow, NICHT im openChatBtn
+  if (
+    chatOverlay.style.display === "flex" &&
+    !chatWindow.contains(e.target) &&
+    !openChatBtn.contains(e.target)
+  ) {
+    // Minimieren
+    setChatVisible(false);
+  }
+});
+
+//----------------------------------
+// Senden-Logik
+//----------------------------------
+if (sendChatBtn && chatInput && chatMessages) {
+  sendChatBtn.addEventListener("click", async () => {
+    const userText = chatInput.value.trim();
+    if (!userText) return;
+
+    addMessage("user", userText);
+    chatInput.value = "";
+
+    const botReply = await getBotResponse(userText);
+    addMessage("bot", botReply);
+  });
+
+  chatInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+      sendChatBtn.click();
+    }
+  });
+}
+
+//----------------------------------
+// OpenAI / Netlify-Function
+//----------------------------------
 async function getBotResponse(userText) {
   try {
     const response = await fetch(NETLIFY_FUNCTION_URL, {
@@ -57,95 +197,76 @@ async function getBotResponse(userText) {
   }
 }
 
-// Senden-Knopf
-if (sendChatBtn && chatInput && chatMessages) {
-  sendChatBtn.addEventListener("click", async () => {
-    const userText = chatInput.value.trim();
-    if (!userText) return;
-
-    addMessage("user", userText);
-    chatInput.value = "";
-
-    const botText = await getBotResponse(userText);
-    addMessage("bot", botText);
-  });
-
-  // Enter-Taste
-  chatInput.addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      sendChatBtn.click();
-    }
-  });
-}
-
-/* ---------------------------------------------
-   DRAG & DROP
-   - Chat-Fenster per Header verschieben
-   - Chat-Button verschieben (komplett)
---------------------------------------------- */
-
-// DRAG-Chat-Fenster
-let offsetX = 0, offsetY = 0, isDragging = false;
-
+//----------------------------------
+// DRAG & DROP: Chat-Fenster
+//----------------------------------
 chatHeader?.addEventListener("mousedown", (e) => {
-  isDragging = true;
-  // Aktuelle Mausposition - Position des Fensters
-  offsetX = e.clientX - chatWindow.offsetLeft;
-  offsetY = e.clientY - chatWindow.offsetTop;
-
-  // position:absolute, damit wir die Position ändern können
+  isDraggingWindow = true;
+  windowOffsetX = e.clientX - chatWindow.offsetLeft;
+  windowOffsetY = e.clientY - chatWindow.offsetTop;
   chatWindow.style.position = "absolute";
-  chatWindow.style.zIndex = 9999; // ganz oben
+  chatWindow.style.zIndex = 9999;
 });
 
 document.addEventListener("mousemove", (e) => {
-  if (!isDragging) return;
-  const newX = e.clientX - offsetX;
-  const newY = e.clientY - offsetY;
+  if (!isDraggingWindow) return;
+  const newX = e.clientX - windowOffsetX;
+  const newY = e.clientY - windowOffsetY;
 
-  // Begrenzung: Fenster soll nicht komplett aus dem Screen verschwinden
   const maxX = window.innerWidth - chatWindow.offsetWidth;
   const maxY = window.innerHeight - chatWindow.offsetHeight;
 
-  chatWindow.style.left = Math.max(0, Math.min(newX, maxX)) + "px";
-  chatWindow.style.top = Math.max(0, Math.min(newY, maxY)) + "px";
+  const clampedX = Math.max(0, Math.min(newX, maxX));
+  const clampedY = Math.max(0, Math.min(newY, maxY));
+
+  chatWindow.style.left = clampedX + "px";
+  chatWindow.style.top = clampedY + "px";
+
+  saveChatWindowPos(clampedX, clampedY);
 });
 
 document.addEventListener("mouseup", () => {
-  isDragging = false;
+  isDraggingWindow = false;
 });
 
-// DRAG-Chat-Button
-let btnOffsetX = 0, btnOffsetY = 0, isBtnDragging = false;
-
-openChatBtn?.addEventListener("dragstart", (e) => {
-  // HTML5 Drag&Drop: wir nutzen DataTransfer, 
-  // blockieren aber das standard-Bild
-  e.dataTransfer.setDragImage(new Image(), 0, 0);
-  // Speichern wir uns nur, dass wir "drag" wollen
-});
-
+//----------------------------------
+// DRAG & DROP: Chat-Button
+//----------------------------------
 openChatBtn?.addEventListener("mousedown", (e) => {
-  isBtnDragging = true;
-  btnOffsetX = e.clientX - openChatBtn.offsetLeft;
-  btnOffsetY = e.clientY - openChatBtn.offsetTop;
+  isDraggingButton = true;
+  buttonOffsetX = e.clientX - openChatBtn.offsetLeft;
+  buttonOffsetY = e.clientY - openChatBtn.offsetTop;
   openChatBtn.style.position = "absolute";
   openChatBtn.style.zIndex = 9999;
 });
 
 document.addEventListener("mousemove", (e) => {
-  if (!isBtnDragging) return;
-  const newX = e.clientX - btnOffsetX;
-  const newY = e.clientY - btnOffsetY;
+  if (!isDraggingButton) return;
+  const newX = e.clientX - buttonOffsetX;
+  const newY = e.clientY - buttonOffsetY;
 
-  // Begrenzen, damit der Button nicht komplett verschwindet
   const maxX = window.innerWidth - openChatBtn.offsetWidth;
   const maxY = window.innerHeight - openChatBtn.offsetHeight;
 
-  openChatBtn.style.left = Math.max(0, Math.min(newX, maxX)) + "px";
-  openChatBtn.style.top = Math.max(0, Math.min(newY, maxY)) + "px";
+  const clampedX = Math.max(0, Math.min(newX, maxX));
+  const clampedY = Math.max(0, Math.min(newY, maxY));
+
+  openChatBtn.style.left = clampedX + "px";
+  openChatBtn.style.top = clampedY + "px";
+
+  saveChatButtonPos(clampedX, clampedY);
 });
 
 document.addEventListener("mouseup", () => {
-  isBtnDragging = false;
+  isDraggingButton = false;
+});
+
+//----------------------------------
+// OnLoad: ChatHistory + State
+//----------------------------------
+window.addEventListener("DOMContentLoaded", () => {
+  loadChatHistory();
+  loadChatMinimizedState();
+  loadChatWindowPos();
+  loadChatButtonPos();
 });

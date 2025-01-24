@@ -1,4 +1,6 @@
-/* Allgemeines Reset/Grundstyling */
+/* =========================================
+   RESET / GRUNDSTYLING
+========================================= */
 * {
   box-sizing: border-box;
   margin: 0;
@@ -13,11 +15,13 @@ body {
   font-family: Arial, sans-serif;
   background-color: #f5f5f5;
   color: #333;
-  display: flex;
-  flex-direction: column;
+  display: flex;           /* Container-Layout */
+  flex-direction: column;  /* Footer am Ende */
 }
 
-/* Navigation */
+/* =========================================
+   NAVIGATION
+========================================= */
 header {
   background-color: #000000;
   padding: 10px 0;
@@ -39,9 +43,12 @@ nav ul li a.active {
   border-bottom: 2px solid #fff;
 }
 
-/* Hero */
+/* =========================================
+   HERO
+========================================= */
 .hero {
-  background: url('https://via.placeholder.com/1200x400/4A148C/FFFFFF?text=KI+Solutions') no-repeat center center;
+  background: url('https://via.placeholder.com/1200x400/4A148C/FFFFFF?text=KI+Solutions') 
+    no-repeat center center;
   background-size: cover;
   height: 400px;
   display: flex;
@@ -55,7 +62,7 @@ nav ul li a.active {
 .hero-content h1 {
   font-size: 48px;
   margin-bottom: 10px;
-  color: #000;
+  color: #000;    /* dunklere Schrift auf dem hellen BG */
 }
 .hero-content p {
   font-size: 24px;
@@ -73,20 +80,17 @@ nav ul li a.active {
   cursor: pointer;
 }
 
-/* Abschnittsheader */
-.section-header {
-  text-align: center;
-  padding: 40px 0 20px 0;
-}
-.section-header h1 {
-  margin-bottom: 10px;
-}
-
-/* Pitch Cards */
+/* =========================================
+   PITCH (Warum Juleyka?)
+========================================= */
 .pitch {
   padding: 40px 20px;
   background-color: #fff;
   text-align: center;
+}
+.pitch h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
 }
 .pitch-cards {
   display: flex;
@@ -104,56 +108,112 @@ nav ul li a.active {
   margin-bottom: 10px;
 }
 
-/* Use Cases */
-.use-cases {
-  padding: 20px;
+/* =========================================
+   REFERENCES-SECTION (NEUE Sektion)
+========================================= */
+.references {
+  padding: 40px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+.references h2 {
+  font-size: 36px;
+  margin-bottom: 20px;
+}
+.references-cards {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
 }
-.use-case-item {
-  background-color: #fff;
-  padding: 20px;
-  border-left: 5px solid #4A148C;
+.references-card {
+  background-color: #fafafa;
+  padding: 30px;
+  width: 300px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.references-card:hover {
+  transform: scale(1.05);
+}
+.references-card h3 {
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #333;
+}
+.references-card p {
+  font-size: 16px;
+  color: #555;
 }
 
-/* Kontaktformular */
+/* =========================================
+   CONTACT-FORM
+========================================= */
 .contact-section {
-  padding: 20px;
+  padding: 40px 20px;
+  background-color: #fff; 
 }
+
 .contact-form {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 0 auto; 
   display: flex;
   flex-direction: column;
-}
-.contact-form label {
-  margin: 10px 0 5px 0;
-  font-weight: bold;
-}
-.contact-form input,
-.contact-form textarea {
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
+  gap: 15px; 
 }
 
-/* Footer */
+.contact-form label {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.contact-form button {
+  padding: 12px;
+  font-size: 16px;
+  background-color: #FBC02D;
+  color: #333;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #ffcc33;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
 footer {
   background-color: #000000;
   color: #fff;
   text-align: center;
   padding: 10px;
-  margin-top: auto;
+  margin-top: auto;    /* schiebt Footer ans Ende */
 }
 
-/* Responsive Design */
+/* =========================================
+   RESPONSIVE
+========================================= */
 @media (max-width: 768px) {
   footer {
     font-size: 14px;
     padding: 8px;
   }
+
   .hero-content h1 {
     font-size: 32px;
   }
@@ -164,11 +224,19 @@ footer {
     padding: 8px 16px;
     font-size: 14px;
   }
+
   .pitch-card {
     width: 100%;
     max-width: 300px;
     margin: 0 auto;
   }
+
+  .references-card {
+    width: 100%;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
   nav ul {
     flex-wrap: wrap;
     justify-content: center;
@@ -181,7 +249,14 @@ footer {
   }
 }
 
-/* Chatbot */
+/* =========================================
+   CHAT STYLES
+========================================= */
+#persistent-chat {
+  /* Container für Chat – optional */
+}
+
+/* Chat-Button (draggable) */
 .chatbot-button {
   position: fixed;
   bottom: 30px;
@@ -194,7 +269,7 @@ footer {
   font-weight: bold;
   cursor: pointer;
   box-shadow: 0 4px 6px rgba(0,0,0,0.3);
-  user-select: none; /* besser fürs Draggen */
+  user-select: none; /* Besseres Drag-Verhalten */
 }
 
 .chat-overlay {
@@ -203,13 +278,13 @@ footer {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none; /* initially hidden */
+  display: none; /* Geöffnet => "flex" per JS */
   align-items: center;
   justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Das Chat-Fenster selbst */
+/* Chat-Fenster */
 .chat-window {
   background-color: #fff;
   width: 400px;
@@ -217,19 +292,17 @@ footer {
   border-radius: 8px;
   display: flex;
   flex-direction: column;
-  position: relative; /* Damit wir 'left' / 'top' beim Drag setzen können */
 }
 
-/* Chat-Fenster-Kopfzeile, als Drag-Handle */
+/* Header (Drag-Handle) */
 .chat-header {
-  background-color: #000000;
+  background-color: #000;
   color: #fff;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
-  cursor: move; /* zeigt an, dass man hier greifen kann */
+  cursor: move; /* Drag-Hinweis */
 }
 .chat-header h3 {
   margin: 0;
@@ -242,16 +315,14 @@ footer {
   cursor: pointer;
 }
 
+/* Nachrichtenbereich */
 .chat-messages {
   flex: 1;
   padding: 10px;
   overflow-y: auto;
-
   display: flex;
   flex-direction: column;
 }
-
-/* Nachrichten-Stil */
 .user-message,
 .bot-message {
   margin-bottom: 10px;
@@ -268,25 +339,16 @@ footer {
 }
 .bot-message {
   align-self: flex-start;
-  background-color: #ececec;
+  background-color: #ECECEC;
   color: #333;
 }
 
-/* Label, damit man sieht: "Du:" oder "Juleyka:" */
-.user-message::before {
-  content: "Du: ";
-  font-weight: bold;
-}
-.bot-message::before {
-  content: "Juleyka: ";
-  font-weight: bold;
-}
-
-/* Eingabebereich */
+/* Eingabe-Bereich */
 .chat-input {
   display: flex;
   padding: 10px;
   border-top: 1px solid #ccc;
+  background-color: #fff;
 }
 .chat-input input {
   flex: 1;

@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-
   <!-- Navigation -->
   <header>
     <nav>
@@ -22,50 +21,56 @@
     </nav>
   </header>
 
-  <main>
-    <section class="section-header">
+  <!-- Hero-Bereich -->
+  <section class="hero">
+    <div class="hero-content">
       <h1>Unsere Leistungen</h1>
-      <p>Wir bieten eine breite Palette an KI-basierten Services – passgenau für dein Unternehmen.</p>
-    </section>
+      <p>Entdecke, wie wir dein Unternehmen mit modernster KI-Technologie unterstützen können.</p>
+    </div>
+  </section>
 
-    <section>
-      <h2>1. Chatbots & Sprachassistenten</h2>
-      <p>Wir entwickeln Chatbots auf Basis aktueller KI-Technologie (z.B. GPT-Modelle) und integrieren Sprachassistenten für Alexa, Google Assistant oder für eigene Web-Apps.</p>
-    </section>
-
-    <section>
-      <h2>2. Automatisierung</h2>
-      <p>Ob Zapier oder Make.com – wir bauen für dich Workflows, die repetitive Aufgaben automatisch erledigen. Spare Zeit und Kosten durch effiziente Prozesse.</p>
-    </section>
-
-    <section>
-      <h2>3. Beratung & Schulung</h2>
-      <p>Von der KI-Strategie bis zur Mitarbeiterschulung. Wir zeigen dir und deinem Team, wie ihr KI sinnvoll im Arbeitsalltag nutzt.</p>
-    </section>
-
-    <section>
-      <h2>4. Webentwicklung & Integrationen</h2>
-      <p>Du willst eine moderne Website mit integrierten KI-Features? Kein Problem – wir kümmern uns um das komplette Setup (Hosting, SEO, Performance). </p>
-    </section>
-  </main>
+  <!-- Pitch -->
+  <section class="pitch">
+    <h2>Was wir anbieten</h2>
+    <div class="pitch-cards">
+      <div class="pitch-card">
+        <h3><a href="chatbots.html">Chatbots & Sprachassistenten</a></h3>
+        <p>Entwicklung von Chatbots und Sprachassistenten für verschiedene Plattformen.</p>
+      </div>
+      <div class="pitch-card">
+        <h3><a href="automation.html">Automatisierung</a></h3>
+        <p>Automatisierte Workflows mit Tools wie Zapier und Make.com.</p>
+      </div>
+      <div class="pitch-card">
+        <h3><a href="consulting.html">Beratung & Schulung</a></h3>
+        <p>Individuelle Schulungen und Strategieberatung für dein Team.</p>
+      </div>
+      <div class="pitch-card">
+        <h3><a href="webdevelopment.html">Webentwicklung & Integrationen</a></h3>
+        <p>Moderne Websites mit integriertem KI-Support und optimierter Performance.</p>
+      </div>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Juleyka. Alle Rechte vorbehalten.</p>
   </footer>
 
-  <!-- Chatbot -->
-  <button class="chatbot-button" id="openChatBtn">Chat</button>
-  <div class="chat-overlay" id="chatOverlay">
-    <div class="chat-window">
-      <div class="chat-header">
-        <h3>Juleyka Chatbot</h3>
-        <button id="closeChatBtn">&times;</button>
-      </div>
-      <div class="chat-messages" id="chatMessages"></div>
-      <div class="chat-input">
-        <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
-        <button id="sendChatBtn">Senden</button>
+  <!-- Chat-Bereich (für *jede* Seite identisch) -->
+  <div id="persistent-chat">
+    <button class="chatbot-button" id="openChatBtn" draggable="true">Chat</button>
+    <div class="chat-overlay" id="chatOverlay">
+      <div class="chat-window" id="chatWindow">
+        <div class="chat-header" id="chatHeader">
+          <h3>Juleyka Chatbot</h3>
+          <button id="closeChatBtn">&times;</button>
+        </div>
+        <div class="chat-messages" id="chatMessages"></div>
+        <div class="chat-input">
+          <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
+          <button id="sendChatBtn">Senden</button>
+        </div>
       </div>
     </div>
   </div>
