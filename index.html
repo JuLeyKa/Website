@@ -37,6 +37,28 @@
     </div>
   </section>
 
+  <!-- Slider Section -->
+  <section class="slider">
+    <div class="slides">
+      <div class="slide">
+        <h2>Zoom-Kurse für KI-Anfänger</h2>
+        <p>Starte ab 15€ und entdecke die Welt der KI!</p>
+      </div>
+      <div class="slide">
+        <h2>Chatbot-Integration</h2>
+        <p>Integriere Chatbots in deine Homepage ab 199€!</p>
+      </div>
+      <div class="slide">
+        <h2>Website-Erstellung</h2>
+        <p>Moderne Designs ab 499€ — maßgeschneidert für dich.</p>
+      </div>
+    </div>
+    <div class="slider-controls">
+      <button class="slider-prev">❮</button>
+      <button class="slider-next">❯</button>
+    </div>
+  </section>
+
   <!-- Pitch -->
   <section class="pitch">
     <h2>Warum Juleyka?</h2>
@@ -63,9 +85,7 @@
 
   <!-- Chat-Bereich -->
   <div id="persistent-chat">
-    <!-- Chat-Button (fest unten rechts) -->
     <button class="chatbot-button" id="openChatBtn">Chat</button>
-    <!-- Overlay + Fenster -->
     <div class="chat-overlay" id="chatOverlay">
       <div class="chat-window" id="chatWindow">
         <div class="chat-header" id="chatHeader">
@@ -81,27 +101,8 @@
     </div>
   </div>
 
-  <!-- Haupt-JS -->
-  <script src="main.js"></script>
-
-  <!-- Kleines Skript zum Navbar-Anpassen -->
-  <script>
-    // Warte kurz, bis main.js initialisiert ist
-    document.addEventListener("DOMContentLoaded", () => {
-      if (typeof auth !== "undefined") {
-        auth.onAuthStateChanged((user) => {
-          if (user) {
-            // Wenn eingeloggt, Login-Link ausblenden und Member-Link anzeigen
-            document.getElementById("loginLink").style.display = "none";
-            document.getElementById("memberLink").style.display = "block";
-          } else {
-            // Ausgeloggt
-            document.getElementById("loginLink").style.display = "block";
-            document.getElementById("memberLink").style.display = "none";
-          }
-        });
-      }
-    });
-  </script>
+  <!-- Scripts -->
+  <script src="slider.js"></script> <!-- Slider Logik -->
+  <script src="main.js"></script> <!-- Chat Logik -->
 </body>
 </html>

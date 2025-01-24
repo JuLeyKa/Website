@@ -60,12 +60,12 @@ nav ul li a.active {
   color: #fff;
 }
 .hero-content h1 {
-  font-size: 48px;
+  font-size: 80px;
   margin-bottom: 10px;
   color: #000;
 }
 .hero-content p {
-  font-size: 24px;
+  font-size: 28px;
   margin-bottom: 20px;
   color: #000;
 }
@@ -78,6 +78,67 @@ nav ul li a.active {
   font-weight: bold;
   border-radius: 4px;
   cursor: pointer;
+}
+
+/* =========================================
+   SLIDER
+========================================= */
+.slider {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 1200px;
+  margin: 40px auto;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slide {
+  min-width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  background-color: #fff;
+  padding: 40px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.slide h2 {
+  font-size: 28px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.slide p {
+  font-size: 18px;
+  color: #666;
+}
+
+.slider-controls {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+}
+
+.slider-controls button {
+  background-color: #FBC02D;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  color: #333;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.slider-controls button:hover {
+  background-color: #E6A600;
 }
 
 /* =========================================
@@ -96,7 +157,8 @@ nav ul li a.active {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
+  gap: 40px;
+  margin-top: 40px;
 }
 .pitch-card {
   background-color: #fafafa;
@@ -183,10 +245,10 @@ footer {
     padding: 8px;
   }
   .hero-content h1 {
-    font-size: 32px;
+    font-size: 50px;
   }
   .hero-content p {
-    font-size: 18px;
+    font-size: 20px;
   }
   .btn {
     padding: 8px 16px;
@@ -206,6 +268,17 @@ footer {
   }
   nav ul li a {
     font-size: 14px;
+  }
+  .slider-controls button {
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+  }
+  .slide h2 {
+    font-size: 24px;
+  }
+  .slide p {
+    font-size: 16px;
   }
 }
 
