@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Member-Bereich - Juleyka</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Start</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="member.html" class="active">Member-Bereich</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding: 20px;">
+    <h1>Willkommen im Member-Bereich</h1>
+    <p>Nutzer, die nicht eingeloggt sind, werden automatisch zurück auf die Login-Seite geworfen.</p>
+
+    <button id="logoutBtn" style="margin-top: 20px;">Logout</button>
+
+    <hr/>
+
+    <h2>Geschützte Inhalte</h2>
+    <p>Hier kannst du alles Mögliche anbieten: Links, Videos, exklusive Chatbots etc.</p>
+  </main>
+
+  <script src="main.js"></script>
+</body>
+</html>

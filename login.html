@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - Juleyka</title>
+  <!-- Falls du ein style.css hast, binde es so ein -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDKs (CDN-Version) -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <ul>
+        <li><a href="index.html">Start</a></li>
+        <!-- Login hat hier die active-Klasse, wenn du magst -->
+        <li><a href="login.html" class="active">Login</a></li>
+        <li><a href="member.html">Member-Bereich</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main style="padding: 20px;">
+    <h1>Login</h1>
+
+    <!-- Google-Login-Button -->
+    <button id="googleLoginBtn">Mit Google anmelden</button>
+
+    <hr/>
+
+    <!-- E-Mail/Passwort-Login -->
+    <form id="login-form" style="margin-top: 20px;">
+      <label for="email">E-Mail:</label><br/>
+      <input type="email" id="email" required /><br/><br/>
+
+      <label for="password">Passwort:</label><br/>
+      <input type="password" id="password" required /><br/><br/>
+
+      <button type="submit">Login mit E-Mail</button>
+    </form>
+
+    <hr/>
+
+    <!-- E-Mail/Passwort-Registrierung (optional) -->
+    <h2>Noch kein Konto?</h2>
+    <form id="register-form">
+      <label for="reg-email">E-Mail:</label><br/>
+      <input type="email" id="reg-email" required /><br/><br/>
+
+      <label for="reg-password">Passwort:</label><br/>
+      <input type="password" id="reg-password" required /><br/><br/>
+
+      <button type="submit">Jetzt registrieren</button>
+    </form>
+
+  </main>
+
+  <!-- Haupt-JS mit Firebase Config & Auth-Logik -->
+  <script src="main.js"></script>
+</body>
+</html>

@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Juleyka - KI-Lösungen</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDKs -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth.js"></script>
 </head>
 <body>
   <!-- Navigation -->
@@ -17,6 +21,8 @@
         <li><a href="references.html">Referenzen</a></li>
         <li><a href="about.html">Über Uns</a></li>
         <li><a href="contact.html">Kontakt</a></li>
+        <li id="loginLink"><a href="login.html">Login</a></li>
+        <li id="memberLink" style="display: none;"><a href="member.html">Member-Bereich</a></li>
       </ul>
     </nav>
   </header>
@@ -80,5 +86,21 @@
   </div>
 
   <script src="main.js"></script>
+
+  <script>
+    // Firebase-Konfiguration bereits in main.js vorhanden
+    // Auth-Status prüfen und Navigation anpassen
+    auth.onAuthStateChanged((user) => {
+      if (user) {
+        // Wenn eingeloggt, Login-Link ausblenden und Member-Link anzeigen
+        document.getElementById("loginLink").style.display = "none";
+        document.getElementById("memberLink").style.display = "block";
+      } else {
+        // Wenn ausgeloggt, Login-Link anzeigen und Member-Link ausblenden
+        document.getElementById("loginLink").style.display = "block";
+        document.getElementById("memberLink").style.display = "none";
+      }
+    });
+  </script>
 </body>
 </html>
