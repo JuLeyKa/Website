@@ -109,7 +109,7 @@ nav ul li a.active {
 }
 
 /* =========================================
-   REFERENCES-SECTION (NEUE Sektion)
+   REFERENCES (falls vorhanden)
 ========================================= */
 .references {
   padding: 40px 20px;
@@ -149,7 +149,7 @@ nav ul li a.active {
 }
 
 /* =========================================
-   CONTACT-FORM
+   CONTACT-FORM (falls vorhanden)
 ========================================= */
 .contact-section {
   padding: 40px 20px;
@@ -230,7 +230,6 @@ footer {
     max-width: 300px;
     margin: 0 auto;
   }
-
   .references-card {
     width: 100%;
     max-width: 300px;
@@ -364,4 +363,23 @@ footer {
   cursor: pointer;
   border-radius: 0 4px 4px 0;
   font-weight: bold;
+}
+
+/* =========================================
+   SPEZIELLE MOBIL-ANPASSUNG FÜR CHAT-FENSTER
+========================================= */
+@media (max-width: 480px) {
+  .chat-window {
+    width: 90% !important;
+    height: 80% !important;
+    max-width: none !important;  /* Kein starres 400px-Limit */
+    border-radius: 8px;
+    /* Falls das Fenster beim Drag out-of-bounds gerät, 
+       könntest du left/top hier zurücksetzen:
+       left: 0 !important; 
+       right: 0 !important;
+       margin: 0 auto; 
+       usw.
+    */
+  }
 }
