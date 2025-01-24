@@ -109,6 +109,61 @@ nav ul li a.active {
 }
 
 /* =========================================
+   CONTACT FORM
+========================================= */
+.contact-form {
+  background-color: #fff;
+  padding: 40px 20px;
+  text-align: center;
+}
+.contact-form h2 {
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+.contact-form p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+.form-container {
+  max-width: 600px;
+  margin: 0 auto;
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+}
+.form-group label {
+  font-size: 16px;
+  margin-bottom: 5px;
+  display: block;
+}
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.btn {
+  background-color: #FBC02D;
+  color: #333;
+  padding: 10px 20px;
+  text-decoration: none;
+  border: none;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #E6A600;
+}
+
+/* =========================================
    FOOTER
 ========================================= */
 footer {
