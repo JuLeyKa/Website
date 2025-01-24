@@ -2,7 +2,7 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Über Uns - Juleyka</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -21,44 +21,52 @@
     </nav>
   </header>
 
-  <main>
-    <section class="section-header">
-      <h1>Über Juleyka</h1>
-      <p>Wir sind ein junges, innovatives Unternehmen, gegründet von Halil Zabun, spezialisiert auf KI-Lösungen.</p>
-    </section>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 style="font-size: 2rem;">Über Juleyka</h1>
+      <p style="font-size: 1.3rem;">Der Wandel mit KI beginnt hier.</p>
+    </div>
+  </section>
 
-    <section>
-      <h2>Unsere Geschichte</h2>
-      <p>Halil Zabun entdeckte seine Leidenschaft für Künstliche Intelligenz bereits früh in seiner beruflichen Laufbahn im Automobilsektor. Nach Stationen bei renommierten Unternehmen, umfassenden KI-Schulungen und der Spezialisierung auf Chatbots & Automatisierung gründete er „Juleyka“ – ein Service- und Beratungsunternehmen, das Firmen wie Privatpersonen hilft, KI-Technologien erfolgreich einzusetzen.</p>
-    </section>
-
-    <section>
-      <h2>Unsere Mission</h2>
-      <p>Wir glauben daran, dass KI nicht kompliziert sein muss. Unser Ziel ist es, sowohl kleinen als auch großen Organisationen den Einstieg in KI zu ermöglichen. Wir vereinen Beratung, Entwicklung und Schulung unter einem Dach.</p>
-    </section>
-
-    <section>
-      <h2>Unser Team</h2>
-      <p>Ein buntes Team aus Entwicklern, Designern und KI-Experten arbeitet jeden Tag daran, effiziente und zukunftsweisende Lösungen zu schaffen.</p>
-    </section>
-
-  </main>
+  <!-- About Content -->
+  <section class="about-content">
+    <div class="about-section" style="margin-bottom: 30px; font-size: 1.2rem; line-height: 1.6;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Unsere Vision</h2>
+      <p>Wir leben in einer Zeit des Wandels, in der Künstliche Intelligenz nicht mehr nur eine Technologie ist, sondern eine Möglichkeit, unsere Zukunft aktiv zu gestalten. Juleyka hat es sich zur Aufgabe gemacht, KI für alle zugänglich zu machen – unabhängig davon, ob Sie ein Unternehmen führen oder als Einzelperson lernen möchten, wie KI Ihnen helfen kann.</p>
+    </div>
+    <div class="about-section" style="margin-bottom: 30px; font-size: 1.2rem; line-height: 1.6;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Unsere Mission</h2>
+      <p>Lernen war nie einfacher – heute kostet es nur noch Zeit. Wir glauben daran, dass KI jedem eine bessere Zukunft ermöglichen kann. Deshalb bieten wir Zoom-Calls und individuelle Workshops an, um Wissen zu teilen und neue Wege zu eröffnen. Für Unternehmen stehen wir als Partner bereit, um innovative Lösungen zu entwickeln, die echte Ergebnisse liefern.</p>
+    </div>
+    <div class="about-section" style="margin-bottom: 30px; font-size: 1.2rem; line-height: 1.6;">
+      <h2 style="font-size: 1.5rem; margin-bottom: 10px;">Unser Ansatz</h2>
+      <p>Bei Juleyka verbinden wir Vision und Praxis. Unser Ziel ist es, KI nicht nur verständlich zu machen, sondern auch direkt anwendbar – für Einzelpersonen und Organisationen. Denn Veränderung beginnt mit Wissen, und Wissen teilen wir gerne.</p>
+    </div>
+  </section>
 
   <!-- Footer -->
   <footer>
     <p>&copy; 2025 Juleyka. Alle Rechte vorbehalten.</p>
   </footer>
 
-  <!-- Chat-Bereich (für *jede* Seite identisch) -->
+  <!-- Chat-Bereich -->
   <div id="persistent-chat">
-    <button class="chatbot-button" id="openChatBtn" draggable="true">Chat</button>
+    <!-- Chat-Button (fest unten rechts) -->
+    <button class="chatbot-button" id="openChatBtn">
+      Chat
+    </button>
+
+    <!-- Overlay + Fenster -->
     <div class="chat-overlay" id="chatOverlay">
       <div class="chat-window" id="chatWindow">
         <div class="chat-header" id="chatHeader">
           <h3>Juleyka Chatbot</h3>
           <button id="closeChatBtn">&times;</button>
         </div>
+
         <div class="chat-messages" id="chatMessages"></div>
+
         <div class="chat-input">
           <input type="text" id="chatInput" placeholder="Frage hier eingeben..." />
           <button id="sendChatBtn">Senden</button>

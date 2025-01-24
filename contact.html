@@ -22,34 +22,42 @@
     </nav>
   </header>
 
-  <main>
-    <section class="section-header">
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
       <h1>Kontakt</h1>
-      <p>Du möchtest mehr über unsere Leistungen erfahren oder hast Fragen? Melde dich gerne!</p>
-    </section>
+      <p>Hast du Fragen oder möchtest mehr erfahren? Wir freuen uns auf deine Nachricht!</p>
+    </div>
+  </section>
 
-    <section class="contact-section">
-      <form class="contact-form">
-        <label for="name">Name *</label>
-        <input type="text" id="name" name="name" required />
+  <!-- Contact Section -->
+  <section class="contact-section" style="text-align: center; margin: 40px auto; max-width: 600px;">
+    <h2 style="font-size: 1.8rem; margin-bottom: 20px;">Schreib uns!</h2>
+    <p style="font-size: 1.2rem; margin-bottom: 30px;">Fülle das Formular aus oder kontaktiere uns direkt per E-Mail oder Telefon.</p>
+    
+    <!-- Contact Form -->
+    <form class="contact-form" style="display: flex; flex-direction: column; gap: 15px;">
+      <label for="name" style="font-size: 1.2rem;">Name *</label>
+      <input type="text" id="name" name="name" required style="padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;" />
 
-        <label for="email">E-Mail *</label>
-        <input type="email" id="email" name="email" required />
+      <label for="email" style="font-size: 1.2rem;">E-Mail *</label>
+      <input type="email" id="email" name="email" required style="padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;" />
 
-        <label for="message">Nachricht *</label>
-        <textarea id="message" name="message" rows="5" required></textarea>
+      <label for="message" style="font-size: 1.2rem;">Nachricht *</label>
+      <textarea id="message" name="message" rows="5" required style="padding: 10px; font-size: 1rem; border: 1px solid #ccc; border-radius: 5px;"></textarea>
 
-        <button type="submit" class="btn">Absenden</button>
-      </form>
-    </section>
-  </main>
+      <button type="submit" class="btn" style="padding: 10px 20px; font-size: 1rem; background-color: #f0a500; color: white; border: none; border-radius: 5px; cursor: pointer;">
+        Absenden
+      </button>
+    </form>
+  </section>
 
   <!-- Footer -->
-  <footer>
+  <footer style="text-align: center; margin-top: 50px;">
     <p>&copy; 2025 Juleyka. Alle Rechte vorbehalten.</p>
   </footer>
 
-  <!-- Chat-Bereich (für *jede* Seite identisch) -->
+  <!-- Chat-Bereich -->
   <div id="persistent-chat">
     <button class="chatbot-button" id="openChatBtn" draggable="true">Chat</button>
     <div class="chat-overlay" id="chatOverlay">
