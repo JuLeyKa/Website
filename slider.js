@@ -7,11 +7,14 @@ let currentSlide = 0;
 let autoSlideInterval; // Timer für automatischen Slide
 
 // Geschwindigkeit in Millisekunden (z.B. 3000 = 3 Sekunden)
-const SLIDE_SPEED = 3000;
+const SLIDE_SPEED = 7000;
 
 function updateSlider() {
   slides.forEach((slide, index) => {
-    slide.style.transform = `translateX(${(index - currentSlide) * 100}%)`;
+    slide.style.display = "none"; // Alle Slides verstecken
+    if (index === currentSlide) {
+      slide.style.display = "block"; // Nur die aktuelle Slide anzeigen
+    }
   });
 }
 
@@ -51,13 +54,6 @@ if (prevButton) {
     startAutoSlide(); // Timer neu starten
   });
 }
-
-// Klick auf die komplette Slide => services.html
-slides.forEach((slide) => {
-  slide.addEventListener("click", () => {
-    window.location.href = "services.html";
-  });
-});
 
 // Initial
 updateSlider();

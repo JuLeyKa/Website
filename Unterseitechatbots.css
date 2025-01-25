@@ -1,0 +1,107 @@
+/* =========================================
+   CHATBOTS & SPRACHASSISTENTEN PAGE STYLING
+========================================= */
+
+/* Hero Section */
+.hero {
+  background-color: #000; /* Schwarz */
+  color: white; /* Weiße Schrift */
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 10px;
+}
+
+.hero p {
+  font-size: 20px;
+  margin-top: 0;
+}
+
+/* Content Section */
+section.content {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.content h2 {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.content p {
+  font-size: 18px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.content ul li {
+  margin-bottom: 15px;
+}
+
+.content ul li h3 {
+  font-size: 20px;
+  margin: 0;
+  color: #4A148C;
+}
+
+.content ul li p {
+  margin: 5px 0 0;
+  font-size: 16px;
+}
+
+/* Call-to-Action Section */
+.cta {
+  background-color: #FBC02D; /* Gelber Hintergrund */
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.cta p {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.cta .btn {
+  display: inline-block;
+  background-color: #000; /* Schwarzer Button */
+  color: #fff; /* Weiße Schrift */
+  padding: 12px 20px;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 5px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.cta .btn:hover {
+  background-color: #333; /* Dunkler beim Hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 36px;
+  }
+  .hero p {
+    font-size: 18px;
+  }
+  .content {
+    padding: 15px;
+  }
+}
