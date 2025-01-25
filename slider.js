@@ -52,5 +52,13 @@ if (prevButton) {
   });
 }
 
+// Klick auf die komplette Slide => services.html
+slides.forEach((slide) => {
+  slide.addEventListener("click", () => {
+    window.location.href = "services.html";
+  });
+});
+
+// Initial
 updateSlider();
 startAutoSlide();
